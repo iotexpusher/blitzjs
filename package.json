@@ -4,7 +4,7 @@
   "scripts": {
     "start": "blitz start",
     "studio": "blitz db studio",
-    "build": "blitz build; npm run generate",
+    "build": "npm run generate; blitz build; ",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
     "test": "echo \"No tests yet\"",
     "update": "prisma introspect --schema=./db/schema.prisma; npm run generate",
