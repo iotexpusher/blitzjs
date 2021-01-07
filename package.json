@@ -6,7 +6,8 @@
     "studio": "blitz db studio",
     "build": "blitz build",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
-    "test": "echo \"No tests yet\""
+    "test": "echo \"No tests yet\"",
+    "update": "prisma introspect --schema=./db/schema.prisma; prisma generate --schema ./db/schema.prisma; "
   },
   "browserslist": [
     "defaults"
@@ -27,11 +28,23 @@
     ]
   },
   "dependencies": {
-    "@prisma/cli": "latest",
-    "@prisma/client": "latest",
+    "@prisma/cli": "2.12.0",
+    "@prisma/client": "2.12.0",
+    "@stitches/react": "0.0.2",
+    "@types/antd": "1.0.0",
+    "@types/lodash": "4.14.167",
+    "@types/yup": "0.29.11",
+    "antd": "4.10.0",
     "blitz": "latest",
+    "dayjs": "1.10.2",
+    "iotex-antenna": "0.30.4",
+    "lodash": "4.17.20",
+    "mobx": "6.0.4",
+    "mobx-react-lite": "3.1.6",
+    "mobx-remotedev": "0.3.6",
     "react": "experimental",
-    "react-dom": "experimental"
+    "react-dom": "experimental",
+    "yup": "0.32.8"
   },
   "devDependencies": {
     "@types/react": "16.9.36",

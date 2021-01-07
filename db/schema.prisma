@@ -1,27 +1,51 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-datasource sqlite {
-  provider = "sqlite"
-  url      = "file:./db.sqlite"
-}
-
-// SQLite is easy to start with, but if you use Postgres in production
-// you should also use it in development with the following:
-//datasource postgresql {
-//  provider = "postgresql"
-//  url      = env("DATABASE_URL")
-//}
-
 generator client {
   provider = "prisma-client-js"
 }
 
+/// 
+datasource postgresql {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
 
-// --------------------------------------
+model prisma_migrations {
+  id                  String    @id
+  checksum            String
+  finished_at         DateTime?
+  migration_name      String
+  logs                String?
+  rolled_back_at      DateTime?
+  started_at          DateTime  @default(now())
+  applied_steps_count Int       @default(0)
 
-//model Project {
-//  id        Int      @default(autoincrement()) @id
-//  name      String
-//}
+  @@map("_prisma_migrations")
+}
 
+model grade {
+  level       Int    @id
+  point_begin Int
+  max_point   Int    @default(0)
+  user        user[]
+}
+
+model point_record {
+  /// This field's default value can currently not be parsed: `gen_random_uuid()`.
+  id      String @id @default(dbgenerated())
+  points  Int
+  user_id String
+  user    user   @relation(fields: [user_id], references: [id])
+}
+
+model user {
+  /// This field's default value can currently not be parsed: `gen_random_uuid()`.
+  id                String         @id @default(dbgenerated())
+  ip                String         @unique
+  address           String         @unique
+  point_renaming    Int            @default(0)
+  grade             Int?           @default(0)
+  created_at        DateTime       @default(now())
+  updated_at        DateTime       @default(now())
+  gain_point_at     DateTime       @default(now())
+  grade_gradeTouser grade?         @relation(fields: [grade], references: [level])
+  point_record      point_record[]
+}
