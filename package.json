@@ -4,10 +4,11 @@
   "scripts": {
     "start": "blitz start",
     "studio": "blitz db studio",
-    "build": "blitz build",
+    "build": "blitz build; npm run generate",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
     "test": "echo \"No tests yet\"",
-    "update": "prisma introspect --schema=./db/schema.prisma; prisma generate --schema ./db/schema.prisma; "
+    "update": "prisma introspect --schema=./db/schema.prisma; npm run generate",
+    "generate": "prisma generate --schema ./db/schema.prisma;"
   },
   "browserslist": [
     "defaults"

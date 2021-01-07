@@ -46,6 +46,7 @@ model user {
   created_at        DateTime       @default(now())
   updated_at        DateTime       @default(now())
   gain_point_at     DateTime       @default(now())
+  point_total       Int            @default(0)
   grade_gradeTouser grade?         @relation(fields: [grade], references: [level])
   point_record      point_record[]
 }
